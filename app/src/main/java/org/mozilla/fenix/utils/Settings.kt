@@ -391,6 +391,16 @@ class Settings private constructor(
         )
     }
 
+    var shouldPromptToSaveLogins by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_save_logins),
+        default = true
+    )
+
+    var shouldAutofillLogins by booleanPreference(
+        appContext.getPreferenceKey(R.string.pref_key_autofill_logins),
+        default = true
+    )
+
     var fxaSignedIn by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_fxa_signed_in),
         default = true
