@@ -152,7 +152,7 @@
     <!-- Title for the settings page-->
     <string name="settings">Settings</string>
     <!-- Preference category for basic settings -->
-    <string name="preferences_category_basics">Basics</string>
+    <string name="preferences_category_interface">Interface</string>
     <!-- Preference category for all links about Fenix -->
     <string name="preferences_category_about">About</string>
     <!-- Preference for settings related to changing the default search engine -->
@@ -179,9 +179,7 @@
     <!-- Preference for settings related to changing the default browser -->
     <string name="preferences_set_as_default_browser">Set as default browser</string>
     <!-- Preference category for advanced settings -->
-    <string name="preferences_category_advanced">Advanced</string>
-    <!-- Preference category for privacy settings -->
-    <string name="preferences_category_privacy">Privacy</string>
+    <string name="preferences_category_pages">Web pages</string>
     <!-- Preference for advanced site permissions -->
     <string name="preferences_site_permissions">Site permissions</string>
     <!-- Preference for opening links in a private tab-->
@@ -213,7 +211,7 @@
     <!-- Preference linking to the privacy notice -->
     <string name="preferences_privacy_link">Privacy notice</string>
     <!-- Preference category for developer tools -->
-    <string name="developer_tools_category">Developer tools</string>
+    <string name="system_integration_category">System integration</string>
     <!-- Preference for developers -->
     <string name="preferences_remote_debugging">Remote debugging via USB</string>
     <!-- Preference title for switch preference to show search shortcuts -->
@@ -733,7 +731,7 @@
     <string name="preference_screen_lock">Allow for screen locking</string>
 
     <!-- Title for the Delete browsing data preference -->
-    <string name="preferences_delete_browsing_data">Delete browsing data</string>
+    <string name="preferences_delete_browsing_data">Delete browsing data now</string>
     <!-- Title for the tabs item in Delete browsing data -->
     <string name="preferences_delete_browsing_data_tabs_title">Open Tabs</string>
     <!-- Subtitle for the tabs item in Delete browsing data, parameter will be replaced with the number of open tabs -->
