@@ -276,15 +276,6 @@ class HomeFragment : Fragment() {
             requireComponents.analytics.metrics.track(Event.SearchBarTapped(Event.SearchBarTapped.Source.HOME))
         }
 
-        view.add_tab_button.setOnClickListener {
-            invokePendingDeleteJobs()
-            hideOnboardingIfNeeded()
-            val directions = HomeFragmentDirections.actionHomeFragmentToSearchFragment(
-                sessionId = null
-            )
-            nav(R.id.homeFragment, directions)
-        }
-
         PrivateBrowsingButtonView(
             privateBrowsingButton,
             browsingModeManager
