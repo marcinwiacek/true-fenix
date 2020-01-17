@@ -27,8 +27,7 @@
     <!-- Explanation for private browsing displayed to users on home view when they first enable private mode
         The first parameter is the name of the app defined in app_name (for example: Fenix) -->
     <string name="private_browsing_placeholder_description">
-         %1$s clears your search and browsing history when you quit the app or close all private tabs. While this doesn’t make you anonymous to websites or your internet service provider, it makes it
-        easier to keep what you do online private from anyone else who uses this device.
+         %1$s doesn’t save tabs, search and browsing history locally, you just need to quit the app or close tabs after browsing. You’re not anonymous to websites and your internet provider.
     </string>
     <string name="private_browsing_common_myths">
        Common myths about private browsing
@@ -583,13 +582,13 @@
 
     <!-- Collections -->
     <!-- Label to describe what collections are to a new user without any collections -->
-    <string name="collections_description">Collect the things that matter to you. To start, save open tabs to a new collection.</string>
+    <string name="collections_description">Collect sites that matter to you. To start, save open tabs to bookmark folder.</string>
     <!-- Collections header on home fragment -->
-    <string name="collections_header">Collections</string>
+    <string name="collections_header">Your sites</string>
     <!-- Content description (not visible, for screen readers etc.): Opens the collection menu when pressed -->
     <string name="collection_menu_button_content_description">Collection menu</string>
     <!-- No Open Tabs Message Header -->
-    <string name="no_collections_header">No collections</string>
+    <string name="no_collections_header">No bookmarks</string>
     <!-- No Open Tabs Message Description -->
     <string name="no_collections_description">Your collections will be shown here.</string>
     <!-- Title for the "select tabs" step of the collection creator -->
