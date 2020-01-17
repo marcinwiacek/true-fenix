@@ -20,6 +20,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import mozilla.appservices.places.BookmarkRoot
 import mozilla.components.browser.session.Session
 import mozilla.components.browser.session.SessionManager
 import mozilla.components.concept.engine.EngineView
@@ -38,6 +39,7 @@ import org.mozilla.fenix.components.TabCollectionStorage
 import org.mozilla.fenix.components.metrics.Event
 import org.mozilla.fenix.ext.components
 import org.mozilla.fenix.ext.nav
+import org.mozilla.fenix.home.HomeMenu
 import org.mozilla.fenix.lib.Do
 import org.mozilla.fenix.settings.deletebrowsingdata.deleteAndQuit
 
@@ -124,9 +126,15 @@ class DefaultBrowserToolbarController(
             ToolbarMenu.Item.Settings -> adjustBackgroundAndNavigate.invoke(
                 BrowserFragmentDirections.actionBrowserFragmentToSettingsFragment()
             )
-            ToolbarMenu.Item.Library -> adjustBackgroundAndNavigate.invoke(
-                BrowserFragmentDirections.actionBrowserFragmentToLibraryFragment()
-            )
+            ToolbarMenu.Item.History ->
+                adjustBackgroundAndNavigate.invoke(
+                    BrowserFragmentDirections.actionBrowserFragmentToHistoryFragment()
+                )
+            ToolbarMenu.Item.Bookmarks ->
+                adjustBackgroundAndNavigate.invoke(
+                    BrowserFragmentDirections.actionBrowserFragmentToBookmarksFragment(BookmarkRoot.Mobile.id)
+                )
+
             is ToolbarMenu.Item.RequestDesktop -> sessionUseCases.requestDesktopSite.invoke(
                 item.isChecked,
                 currentSession
@@ -273,7 +281,8 @@ class DefaultBrowserToolbarController(
             ToolbarMenu.Item.Reload -> Event.BrowserMenuItemTapped.Item.RELOAD
             ToolbarMenu.Item.Stop -> Event.BrowserMenuItemTapped.Item.STOP
             ToolbarMenu.Item.Settings -> Event.BrowserMenuItemTapped.Item.SETTINGS
-            ToolbarMenu.Item.Library -> Event.BrowserMenuItemTapped.Item.LIBRARY
+            ToolbarMenu.Item.Bookmarks -> Event.BrowserMenuItemTapped.Item.LIBRARY
+            ToolbarMenu.Item.History -> Event.BrowserMenuItemTapped.Item.LIBRARY
             is ToolbarMenu.Item.RequestDesktop ->
                 if (item.isChecked) {
                     Event.BrowserMenuItemTapped.Item.DESKTOP_VIEW_ON

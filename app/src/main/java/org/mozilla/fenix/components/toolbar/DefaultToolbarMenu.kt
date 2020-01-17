@@ -153,7 +153,8 @@ class DefaultToolbarMenu(
         val menuItems = listOfNotNull(
             help,
             settings,
-            library,
+            bookmarks,
+            history,
             desktopMode,
             addToHomescreen.apply { visible = ::shouldShowAddToHomescreen },
             findInPage,
@@ -198,12 +199,20 @@ class DefaultToolbarMenu(
         onItemTapped.invoke(ToolbarMenu.Item.Settings)
     }
 
-    private val library = BrowserMenuImageText(
-        label = context.getString(R.string.browser_menu_your_library),
+    private val bookmarks = BrowserMenuImageText(
+        label = context.getString(R.string.library_bookmarks),
+        imageResource = R.drawable.ic_bookmark_outline,
+        iconTintColorResource = primaryTextColor()
+    ) {
+        onItemTapped.invoke(ToolbarMenu.Item.Bookmarks)
+    }
+
+    private val history = BrowserMenuImageText(
+        label = context.getString(R.string.library_history),
         imageResource = R.drawable.ic_library,
         iconTintColorResource = primaryTextColor()
     ) {
-        onItemTapped.invoke(ToolbarMenu.Item.Library)
+        onItemTapped.invoke(ToolbarMenu.Item.History)
     }
 
     private val desktopMode = BrowserMenuImageSwitch(

@@ -11,7 +11,8 @@ interface ToolbarMenu {
     sealed class Item {
         object Help : Item()
         object Settings : Item()
-        object Library : Item()
+        object Bookmarks : Item()
+        object History:Item()
         data class RequestDesktop(val isChecked: Boolean) : Item()
         object FindInPage : Item()
         object NewPrivateTab : Item()

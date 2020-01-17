@@ -51,7 +51,7 @@ class DeleteBrowsingDataItem @JvmOverloads constructor(
         context.withStyledAttributes(attrs, R.styleable.DeleteBrowsingDataItem, defStyleAttr, 0) {
             val titleId = getResourceId(
                 R.styleable.DeleteBrowsingDataItem_deleteBrowsingDataItemTitle,
-                R.string.browser_menu_your_library
+                R.string.empty_string
             )
             val subtitleId = getResourceId(
                 R.styleable.DeleteBrowsingDataItem_deleteBrowsingDataItemSubtitle,

@@ -181,8 +181,11 @@
             android:id="@+id/action_browserFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
         <action
-            android:id="@+id/action_browserFragment_to_libraryFragment"
-            app:destination="@id/libraryFragment" />
+            android:id="@+id/action_browserFragment_to_bookmarksFragment"
+            app:destination="@id/bookmarkFragment" />
+        <action
+            android:id="@+id/action_browserFragment_to_historyFragment"
+            app:destination="@id/historyFragment" />
         <action
             android:id="@+id/action_browserFragment_to_bookmarkEditFragment"
             app:destination="@id/bookmarkEditFragment" />

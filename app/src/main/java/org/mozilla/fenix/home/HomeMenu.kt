@@ -43,10 +43,10 @@ class HomeMenu(
 
     private val menuItems by lazy {
         val items = mutableListOf(
-            BrowserMenuCategory(
-                context.getString(R.string.browser_menu_your_library),
-                textColorResource = menuCategoryTextColor
-            ),
+            //BrowserMenuCategory(
+              //  context.getString(R.string.browser_menu_your_library),
+                //textColorResource = menuCategoryTextColor
+            //),
 
             BrowserMenuImageText(
                 context.getString(R.string.library_bookmarks),
