@@ -6,27 +6,6 @@
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.preference.Preference
-        app:allowDividerBelow="false"
-        android:key="@string/pref_key_sign_in"
-        android:layout="@layout/sign_in_preference"
-        android:summary="@string/preferences_sign_in_description"
-        android:title="@string/preferences_sync" />
-
-    <androidx.preference.PreferenceCategory
-        android:key="@string/pref_key_account_category"
-        android:title="@string/preferences_category_account"
-        app:iconSpaceReserved="false"
-        app:isPreferenceVisible="false">
-
-        <org.mozilla.fenix.settings.account.AccountPreference
-            android:icon="@drawable/ic_account"
-            android:key="@string/pref_key_account" />
-
-        <org.mozilla.fenix.settings.account.AccountAuthErrorPreference
-            android:icon="@drawable/ic_account_warning"
-            android:key="@string/pref_key_account_auth_error"/>
-    </androidx.preference.PreferenceCategory>
 
     <androidx.preference.PreferenceCategory
         android:title="@string/preferences_category_interface"
@@ -82,6 +61,36 @@
             android:icon="@drawable/ic_permission"
             android:key="@string/pref_key_site_permissions"
             android:title="@string/preferences_site_permissions" />
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        android:title="@string/preferences_category_browsing_data"
+        app:iconSpaceReserved="false">
+
+    <androidx.preference.Preference
+        app:allowDividerBelow="false"
+        android:key="@string/pref_key_sign_in"
+        android:layout="@layout/sign_in_preference"
+        android:summary="@string/preferences_sign_in_description"
+        android:title="@string/preferences_sync" />
+
+    <androidx.preference.PreferenceCategory
+        android:key="@string/pref_key_account_category"
+        android:title="@string/preferences_category_account"
+        app:iconSpaceReserved="false"
+        app:isPreferenceVisible="false">
+
+        <org.mozilla.fenix.settings.account.AccountPreference
+            android:icon="@drawable/ic_account"
+            android:key="@string/pref_key_account" />
+
+        <org.mozilla.fenix.settings.account.AccountAuthErrorPreference
+            android:icon="@drawable/ic_account_warning"
+            android:key="@string/pref_key_account_auth_error"/>
+    </androidx.preference.PreferenceCategory>
+
         <androidx.preference.Preference
             android:icon="@drawable/ic_delete"
             android:key="@string/pref_key_delete_browsing_data"
