@@ -10,6 +10,7 @@ import android.text.style.UnderlineSpan
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.private_browsing_description.view.*
+import mozilla.components.support.ktx.android.view.putCompoundDrawablesRelativeWithIntrinsicBounds
 import org.mozilla.fenix.R
 import org.mozilla.fenix.home.sessioncontrol.TabSessionInteractor
 
@@ -20,6 +21,15 @@ class PrivateBrowsingDescriptionViewHolder(
 
     init {
         val resources = view.context.resources
+        view.private_session_header.text =
+            resources.getString(R.string.no_open_private_tabs_header_2)
+        view.private_session_header.putCompoundDrawablesRelativeWithIntrinsicBounds(
+            end = resources.getDrawable(
+                R.drawable.ic_tabs,
+                null
+            )
+        )
+
         val appName = resources.getString(R.string.app_name)
         view.private_session_description.text = resources.getString(
             R.string.private_browsing_placeholder_description, appName

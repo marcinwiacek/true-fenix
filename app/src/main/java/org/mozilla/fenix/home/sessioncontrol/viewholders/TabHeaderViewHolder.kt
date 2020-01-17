@@ -79,9 +79,14 @@ class TabHeaderViewHolder(
         val headerTextResourceId =
             if (isPrivate) R.string.tabs_header_private_tabs_title else R.string.tab_header_label
         view.header_text.text = view.context.getString(headerTextResourceId)
-        view.share_tabs_button.isInvisible = !isPrivate || !hasTabs
-        view.close_tabs_button.isInvisible = !isPrivate || !hasTabs
-        view.tabs_overflow_button.isVisible = !isPrivate && hasTabs
+//        view.share_tabs_button.isInvisible = !isPrivate || !hasTabs
+//        view.close_tabs_button.isInvisible = !isPrivate || !hasTabs
+//        view.tabs_overflow_button.isVisible = !isPrivate && hasTabs
+
+        view.share_tabs_button.isInvisible = true
+        view.close_tabs_button.isInvisible = true
+        view.tabs_overflow_button.isVisible = hasTabs
+
     }
 
     class TabHeaderMenu(

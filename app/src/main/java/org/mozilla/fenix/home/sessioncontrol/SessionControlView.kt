@@ -69,14 +69,33 @@ private fun normalModeAdapterItems(
     return items
 }
 
-private fun privateModeAdapterItems(tabs: List<Tab>): List<AdapterItem> {
+private fun privateModeAdapterItems(tabs: List<Tab>,
+                                    collections: List<TabCollection>,
+                                    expandedCollections: Set<Long>): List<AdapterItem> {
     val items = mutableListOf<AdapterItem>()
     items.add(AdapterItem.TabHeader(true, tabs.isNotEmpty()))
 
     if (tabs.isNotEmpty()) {
         items.addAll(tabs.reversed().map(AdapterItem::TabItem))
+        items.add(AdapterItem.SaveTabGroup)
     } else {
         items.add(AdapterItem.PrivateBrowsingDescription)
+    }
+
+    items.add(AdapterItem.CollectionHeader)
+    if (collections.isNotEmpty()) {
+
+        // If the collection is expanded, we want to add all of its tabs beneath it in the adapter
+        collections.map {
+            AdapterItem.CollectionItem(it, expandedCollections.contains(it.id), tabs.isNotEmpty())
+        }.forEach {
+            items.add(it)
+            if (it.expanded) {
+                items.addAll(collectionTabItems(it.collection))
+            }
+        }
+    } else {
+        items.add(noCollectionMessage)
     }
 
     return items
@@ -117,7 +136,7 @@ private fun onboardingAdapterItems(onboardingState: OnboardingState): List<Adapt
 
 private fun HomeFragmentState.toAdapterList(): List<AdapterItem> = when (mode) {
     is Mode.Normal -> normalModeAdapterItems(tabs, collections, expandedCollections)
-    is Mode.Private -> privateModeAdapterItems(tabs)
+    is Mode.Private -> privateModeAdapterItems(tabs, collections, expandedCollections)
     is Mode.Onboarding -> onboardingAdapterItems(mode.state)
 }
 
