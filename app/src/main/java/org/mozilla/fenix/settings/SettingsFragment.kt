@@ -143,7 +143,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
             findPreference<Preference>(getPreferenceKey(pref_key_tracking_protection_settings))
         trackingProtectionPreference?.summary = context?.let {
             if (it.settings().shouldUseTrackingProtection) {
-                getString(R.string.tracking_protection_on)
+                if (it.settings().useStrictTrackingProtection) {
+                    getString(R.string.preference_enhanced_tracking_protection_strict_default)
+                } else {
+                    getString(R.string.preference_enhanced_tracking_protection_standard_option)
+                }
             } else {
                 getString(R.string.tracking_protection_off)
             }

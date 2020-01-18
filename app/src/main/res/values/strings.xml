@@ -27,7 +27,7 @@
     <!-- Explanation for private browsing displayed to users on home view when they first enable private mode
         The first parameter is the name of the app defined in app_name (for example: Fenix) -->
     <string name="private_browsing_placeholder_description">
-         %1$s doesn’t save tabs, search and browsing history locally, you just need to quit the app or close tabs after browsing. You’re not anonymous to websites and your internet provider.
+         Tabs, search and browsing history are not saved, you just need to quit %1$s or close tabs after browsing.\n\nYou’re not anonymous to websites and your internet provider.\n
     </string>
     <string name="private_browsing_common_myths">
        Common myths about private browsing

@@ -34,19 +34,19 @@ class SitePermissionsFragment : PreferenceFragmentCompat() {
     }
 
     private fun setupPreferences() {
+        if (!FeatureFlags.autoPlayMedia) {
+            hideAutoplayPreference()
+        }
+
         bindCategoryPhoneFeatures()
         bindExceptions()
-
-        if (FeatureFlags.autoPlayMedia) {
-            displayAutoplayPreference()
-        }
     }
 
-    private fun displayAutoplayPreference() {
+    private fun hideAutoplayPreference() {
         findPreference<Preference>(
             getPreferenceKey(R.string.pref_key_browser_feature_autoplay)
         )?.apply {
-            isVisible = true
+            isVisible = false
         }
     }
 

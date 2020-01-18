@@ -200,6 +200,11 @@ class Settings private constructor(
         default = true
     )
 
+   // var isTrackingProtectionStandard by booleanPreference(
+     //   appContext.getPreferenceKey(R.string.pref_key_tracking_protection_standard_option),
+       // default = false
+    //)
+
     val shouldUseAutoBatteryTheme by booleanPreference(
         appContext.getPreferenceKey(R.string.pref_key_auto_battery_theme),
         default = false
