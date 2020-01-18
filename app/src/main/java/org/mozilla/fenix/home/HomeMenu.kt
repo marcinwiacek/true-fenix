@@ -26,7 +26,7 @@ class HomeMenu(
         object WhatsNew : Item()
         object Help : Item()
         object Settings : Item()
-        object Library : Item()
+       // object Library : Item()
         object History : Item()
         object Bookmarks : Item()
         object Quit : Item()

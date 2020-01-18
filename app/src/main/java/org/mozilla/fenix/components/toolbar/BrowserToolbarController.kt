@@ -159,7 +159,7 @@ class DefaultBrowserToolbarController(
                 )
                 navController.navigate(directions)
             }
-            ToolbarMenu.Item.NewTab -> {
+          /*  ToolbarMenu.Item.NewTab -> {
                 val directions = BrowserFragmentDirections.actionBrowserFragmentToSearchFragment(
                     sessionId = null
                 )
@@ -172,7 +172,7 @@ class DefaultBrowserToolbarController(
                 )
                 adjustBackgroundAndNavigate.invoke(directions)
                 browsingModeManager.mode = BrowsingMode.Private
-            }
+            }*/
             ToolbarMenu.Item.FindInPage -> {
                 findInPageLauncher()
                 activity.components.analytics.metrics.track(Event.FindInPageOpened)
@@ -187,7 +187,7 @@ class DefaultBrowserToolbarController(
             ToolbarMenu.Item.Help -> {
                 activity.components.useCases.tabsUseCases.addTab.invoke(getSupportUrl())
             }
-            ToolbarMenu.Item.SaveToCollection -> {
+        /*    ToolbarMenu.Item.SaveToCollection -> {
                 activity.components.analytics.metrics
                     .track(Event.CollectionSaveButtonPressed(TELEMETRY_BROWSER_IDENTIFIER))
 
@@ -204,7 +204,7 @@ class DefaultBrowserToolbarController(
                     )
                     navController.nav(R.id.browserFragment, directions)
                 }
-            }
+            }*/
             ToolbarMenu.Item.OpenInFenix -> {
                 // Release the session from this view so that it can immediately be rendered by a different view
                 engineView.release()
@@ -290,14 +290,14 @@ class DefaultBrowserToolbarController(
                     Event.BrowserMenuItemTapped.Item.DESKTOP_VIEW_OFF
                 }
 
-            ToolbarMenu.Item.NewPrivateTab -> Event.BrowserMenuItemTapped.Item.NEW_PRIVATE_TAB
+       //     ToolbarMenu.Item.NewPrivateTab -> Event.BrowserMenuItemTapped.Item.NEW_PRIVATE_TAB
             ToolbarMenu.Item.FindInPage -> Event.BrowserMenuItemTapped.Item.FIND_IN_PAGE
             ToolbarMenu.Item.ReportIssue -> Event.BrowserMenuItemTapped.Item.REPORT_SITE_ISSUE
             ToolbarMenu.Item.Help -> Event.BrowserMenuItemTapped.Item.HELP
-            ToolbarMenu.Item.NewTab -> Event.BrowserMenuItemTapped.Item.NEW_TAB
+        //    ToolbarMenu.Item.NewTab -> Event.BrowserMenuItemTapped.Item.NEW_TAB
             ToolbarMenu.Item.OpenInFenix -> Event.BrowserMenuItemTapped.Item.OPEN_IN_FENIX
             ToolbarMenu.Item.Share -> Event.BrowserMenuItemTapped.Item.SHARE
-            ToolbarMenu.Item.SaveToCollection -> Event.BrowserMenuItemTapped.Item.SAVE_TO_COLLECTION
+        //    ToolbarMenu.Item.SaveToCollection -> Event.BrowserMenuItemTapped.Item.SAVE_TO_COLLECTION
             ToolbarMenu.Item.AddToHomeScreen -> Event.BrowserMenuItemTapped.Item.ADD_TO_HOMESCREEN
             ToolbarMenu.Item.Quit -> Event.BrowserMenuItemTapped.Item.QUIT
             is ToolbarMenu.Item.ReaderMode ->

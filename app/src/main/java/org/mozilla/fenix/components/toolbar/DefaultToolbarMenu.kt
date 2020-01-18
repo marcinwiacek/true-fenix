@@ -131,8 +131,8 @@ class DefaultToolbarMenu(
 
     private val menuItems by lazy {
         // Predicates that are called once, during screen init
-        val shouldShowSaveToCollection = (context.asActivity() as? HomeActivity)
-            ?.browsingModeManager?.mode == BrowsingMode.Normal
+       // val shouldShowSaveToCollection = (context.asActivity() as? HomeActivity)
+      //      ?.browsingModeManager?.mode == BrowsingMode.Normal
         val shouldDeleteDataOnQuit = Settings.getInstance(context)
             .shouldDeleteBrowsingDataOnQuit
 
@@ -151,23 +151,26 @@ class DefaultToolbarMenu(
             sessionManager.selectedSession?.readerMode ?: false
 
         val menuItems = listOfNotNull(
-            help,
-            settings,
-            bookmarks,
-            history,
-            desktopMode,
+            menuToolbar,
+            BrowserMenuDivider(),
             addToHomescreen.apply { visible = ::shouldShowAddToHomescreen },
+                    desktopMode,
             findInPage,
-            privateTab,
-            newTab,
+            //privateTab,
+            // newTab,
             reportIssue,
-            if (shouldShowSaveToCollection) saveToCollection else null,
+            //  if (shouldShowSaveToCollection) saveToCollection else null,
             if (shouldDeleteDataOnQuit) deleteDataOnQuit else null,
             readerMode.apply { visible = ::shouldShowReaderMode },
             readerAppearance.apply { visible = ::shouldShowReaderAppearance },
             openInApp.apply { visible = ::shouldShowOpenInApp },
+
             BrowserMenuDivider(),
-            menuToolbar
+            bookmarks,
+            history,
+            BrowserMenuDivider(),
+            settings,
+            help
         )
 
         if (shouldReverseItems) { menuItems.reversed() } else { menuItems }
@@ -247,7 +250,7 @@ class DefaultToolbarMenu(
         onItemTapped.invoke(ToolbarMenu.Item.FindInPage)
     }
 
-    private val privateTab = BrowserMenuImageText(
+   /* private val privateTab = BrowserMenuImageText(
         label = context.getString(R.string.browser_menu_private_tab),
         imageResource = R.drawable.ic_private_browsing,
         iconTintColorResource = primaryTextColor()
@@ -261,7 +264,7 @@ class DefaultToolbarMenu(
         iconTintColorResource = primaryTextColor()
     ) {
         onItemTapped.invoke(ToolbarMenu.Item.NewTab)
-    }
+    }*/
 
     private val reportIssue = BrowserMenuImageText(
         label = context.getString(R.string.browser_menu_report_issue),
@@ -271,13 +274,13 @@ class DefaultToolbarMenu(
         onItemTapped.invoke(ToolbarMenu.Item.ReportIssue)
     }
 
-    private val saveToCollection = BrowserMenuImageText(
+    /*private val saveToCollection = BrowserMenuImageText(
         label = context.getString(R.string.browser_menu_save_to_collection),
         imageResource = R.drawable.ic_tab_collection,
         iconTintColorResource = primaryTextColor()
     ) {
         onItemTapped.invoke(ToolbarMenu.Item.SaveToCollection)
-    }
+    }*/
 
     private val deleteDataOnQuit = BrowserMenuImageText(
         label = context.getString(R.string.delete_browsing_data_on_quit_action),
