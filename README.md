@@ -124,6 +124,10 @@ Let's do technical work together without unnecessary words - if it gives profits
 
 1. Download true-android-components (into true-android-components folder) and true-fenix (into true-fenix folder)
 
-2. In the true-fenix\local.properties add line ``autoPublish.android-components.dir=../true-android-components``
+2. import true-android-components into Android Studio and wait for synchronization
 
-3. Import project inside Android Studio from true-fenix folder
+3. import true-fenix into Android Studio and wait for creating local.properties file
+
+4. in the true-fenix\local.properties add line ``autoPublish.android-components.dir=../true-android-components``
+
+5. make again synchronization for true-fenix (maybe you have close and open project)
