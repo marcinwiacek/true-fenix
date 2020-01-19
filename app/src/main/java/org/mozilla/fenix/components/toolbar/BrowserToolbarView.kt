@@ -178,7 +178,7 @@ class BrowserToolbarView(
                     this,
                     sessionManager,
                     customTabSession?.id,
-                    shouldReverseItems = !shouldUseBottomToolbar,
+                    shouldReverseItems = false,
                     onItemTapped = {
                         interactor.onBrowserToolbarMenuItemTapped(it)
                     }
@@ -193,7 +193,7 @@ class BrowserToolbarView(
                     readerModeStateProvider = {
                         sessionManager.selectedSession?.readerMode ?: false
                     },
-                    shouldReverseItems = !shouldUseBottomToolbar,
+                    shouldReverseItems = false,
                     onItemTapped = { interactor.onBrowserToolbarMenuItemTapped(it) },
                     lifecycleOwner = container.context as AppCompatActivity,
                     sessionManager = sessionManager,
