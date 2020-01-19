@@ -38,22 +38,6 @@
                 app:srcCompat="@drawable/mozac_ic_check" />
     </ImageSwitcher>
 
-    <TextView
-            android:id="@+id/title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:ellipsize="end"
-            android:singleLine="true"
-            android:textAlignment="viewStart"
-            android:textSize="18sp"
-            android:textColor="?primaryText"
-            tools:text="Example site"
-            app:layout_constraintEnd_toStartOf="@id/overflow_menu"
-            app:layout_constraintStart_toEndOf="@id/icon"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/url"
-            app:layout_constraintVertical_chainStyle="packed"/>
 
     <TextView
             android:id="@+id/url"
@@ -66,9 +50,29 @@
             android:textColor="?secondaryText"
             android:textSize="12sp"
             tools:text="https://example.com/"
+
             app:layout_constraintEnd_toStartOf="@id/overflow_menu"
             app:layout_constraintStart_toEndOf="@id/icon"
-            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/title"
+            app:layout_constraintVertical_chainStyle="packed"/>
+
+
+    <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:ellipsize="end"
+            android:textAlignment="viewStart"
+        android:maxLines="2"
+        android:minLines="2"
+        android:textAppearance="@style/Body14TextStyle"
+            tools:text="Example site"
+
+            app:layout_constraintEnd_toStartOf="@id/overflow_menu"
+            app:layout_constraintStart_toEndOf="@id/icon"
+            app:layout_constraintTop_toBottomOf="@+id/url"
             app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageButton
