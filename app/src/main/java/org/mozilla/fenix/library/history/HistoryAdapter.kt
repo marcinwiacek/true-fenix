@@ -14,19 +14,26 @@ import kotlinx.android.synthetic.main.history_list_item.view.*
 import org.mozilla.fenix.R
 import org.mozilla.fenix.library.SelectionHolder
 import org.mozilla.fenix.library.history.viewholders.HistoryListItemViewHolder
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Date
 
 enum class HistoryItemTimeGroup {
-    Today, ThisWeek, ThisMonth, Older;
+    Today, Yesterday, ThisWeek, PreviousWeek, ThisMonth, PreviousMonth, Older;
 
     var groupVisible = true
 
     fun humanReadable(context: Context): String = when (this) {
-        Today -> context.getString(R.string.history_24_hours)
-        ThisWeek -> context.getString(R.string.history_7_days)
-        ThisMonth -> context.getString(R.string.history_30_days)
+        Today -> context.getString(R.string.history_today)
+        Yesterday -> context.getString(R.string.history_yesterday)
+        ThisWeek -> context.getString(R.string.history_this_week)
+        PreviousWeek -> context.getString(R.string.history_previous_week)
+        ThisMonth -> context.getString(R.string.history_this_month)
+        PreviousMonth -> context.getString(R.string.history_previous_month)
         Older -> context.getString(R.string.history_older)
+
+        //Older -> String.format("%02i - %04i", date.month,date.year)
     }
 }
 
@@ -66,27 +73,62 @@ class HistoryAdapter(
     }
 
     companion object {
-        private const val zeroDays = 0
-        private const val sevenDays = 7
-        private const val thirtyDays = 30
-        private val oneDayAgo = getDaysAgo(zeroDays).time
-        private val sevenDaysAgo = getDaysAgo(sevenDays).time
-        private val thirtyDaysAgo = getDaysAgo(thirtyDays).time
-        private val lastWeekRange = LongRange(sevenDaysAgo, oneDayAgo)
-        private val lastMonthRange = LongRange(thirtyDaysAgo, sevenDaysAgo)
+        private fun isDateThisWeek(time: Long): Boolean {
+            val today = Calendar.getInstance()
+            val week = today.get(Calendar.WEEK_OF_YEAR)
+            val year = today.get(Calendar.YEAR)
+            val checked = Calendar.getInstance()
+            checked.timeInMillis = time
+            return week == checked.get(Calendar.WEEK_OF_YEAR) && year == checked.get(Calendar.YEAR)
+        }
 
-        private fun getDaysAgo(daysAgo: Int): Date {
-            val calendar = Calendar.getInstance()
-            calendar.add(Calendar.DAY_OF_YEAR, -daysAgo)
+        private fun isDatePreviousWeek(time: Long): Boolean {
+            val today = Calendar.getInstance()
+            val week = today.get(Calendar.WEEK_OF_YEAR)
+            val year = today.get(Calendar.YEAR)
+            if (week == 1) {
+                //FIXME
+                return false
+            } else {
+                val checked = Calendar.getInstance()
+                checked.timeInMillis = time
+                return week == checked.get(Calendar.WEEK_OF_YEAR) - 1 && year == checked.get(
+                    Calendar.YEAR
+                )
+            }
+        }
 
-            return calendar.time
+        private fun isDateThisMonth(time: Long): Boolean {
+            val today = Calendar.getInstance()
+            val month = today.get(Calendar.MONTH)
+            val year = today.get(Calendar.YEAR)
+            val checked = Calendar.getInstance()
+            checked.timeInMillis = time
+            return month == checked.get(Calendar.MONTH) && year == checked.get(Calendar.YEAR)
+        }
+
+        private fun isDatePreviousMonth(time: Long): Boolean {
+            val today = Calendar.getInstance()
+            val month = today.get(Calendar.MONTH)
+            val year = today.get(Calendar.YEAR)
+            if (month == 0) {
+                //FIXME
+                return false
+            } else {
+                val checked = Calendar.getInstance()
+                checked.timeInMillis = time
+                return month == checked.get(Calendar.MONTH) - 1 && year == checked.get(Calendar.YEAR)
+            }
         }
 
         private fun timeGroupForHistoryItem(item: HistoryItem): HistoryItemTimeGroup {
             return when {
                 DateUtils.isToday(item.visitedAt) -> HistoryItemTimeGroup.Today
-                lastWeekRange.contains(item.visitedAt) -> HistoryItemTimeGroup.ThisWeek
-                lastMonthRange.contains(item.visitedAt) -> HistoryItemTimeGroup.ThisMonth
+                DateUtils.isToday(item.visitedAt + DateUtils.DAY_IN_MILLIS) -> HistoryItemTimeGroup.Yesterday
+                isDateThisWeek(item.visitedAt) -> HistoryItemTimeGroup.ThisWeek
+                isDatePreviousWeek(item.visitedAt) -> HistoryItemTimeGroup.PreviousWeek
+                isDateThisMonth(item.visitedAt) -> HistoryItemTimeGroup.ThisMonth
+                isDatePreviousMonth(item.visitedAt) -> HistoryItemTimeGroup.PreviousMonth
                 else -> HistoryItemTimeGroup.Older
             }
         }
