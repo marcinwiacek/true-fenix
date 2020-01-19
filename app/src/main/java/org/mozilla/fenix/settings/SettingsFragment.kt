@@ -28,31 +28,7 @@ import org.mozilla.fenix.Config
 import org.mozilla.fenix.FeatureFlags
 import org.mozilla.fenix.HomeActivity
 import org.mozilla.fenix.R
-import org.mozilla.fenix.R.string.pref_key_about
-import org.mozilla.fenix.R.string.pref_key_accessibility
-import org.mozilla.fenix.R.string.pref_key_account
-import org.mozilla.fenix.R.string.pref_key_account_auth_error
-import org.mozilla.fenix.R.string.pref_key_account_category
-import org.mozilla.fenix.R.string.pref_key_add_private_browsing_shortcut
-import org.mozilla.fenix.R.string.pref_key_data_choices
-import org.mozilla.fenix.R.string.pref_key_delete_browsing_data
-import org.mozilla.fenix.R.string.pref_key_delete_browsing_data_on_quit_preference
-import org.mozilla.fenix.R.string.pref_key_help
-import org.mozilla.fenix.R.string.pref_key_language
-import org.mozilla.fenix.R.string.pref_key_leakcanary
-import org.mozilla.fenix.R.string.pref_key_make_default_browser
-import org.mozilla.fenix.R.string.pref_key_passwords
-import org.mozilla.fenix.R.string.pref_key_privacy_link
-import org.mozilla.fenix.R.string.pref_key_rate
-import org.mozilla.fenix.R.string.pref_key_remote_debugging
-import org.mozilla.fenix.R.string.pref_key_screen_lock
-import org.mozilla.fenix.R.string.pref_key_search_settings
-import org.mozilla.fenix.R.string.pref_key_sign_in
-import org.mozilla.fenix.R.string.pref_key_site_permissions
-import org.mozilla.fenix.R.string.pref_key_theme
-import org.mozilla.fenix.R.string.pref_key_toolbar
-import org.mozilla.fenix.R.string.pref_key_tracking_protection_settings
-import org.mozilla.fenix.R.string.pref_key_your_rights
+import org.mozilla.fenix.R.string.*
 import org.mozilla.fenix.components.PrivateShortcutCreateManager
 import org.mozilla.fenix.components.metrics.Event
 import org.mozilla.fenix.ext.application
@@ -311,10 +287,12 @@ class SettingsFragment : PreferenceFragmentCompat() {
         val leakKey = getPreferenceKey(pref_key_leakcanary)
         val debuggingKey = getPreferenceKey(pref_key_remote_debugging)
         val screenLockKey = getPreferenceKey(pref_key_screen_lock)
+        val screenToolbarLocation = getPreferenceKey(pref_key_toolbar_on_bottom)
 
         val preferenceLeakCanary = findPreference<Preference>(leakKey)
         val preferenceRemoteDebugging = findPreference<Preference>(debuggingKey)
         val preferenceScreenLocking = findPreference<Preference>(screenLockKey)
+        val preferenceToolbarLocation = findPreference<Preference>(screenToolbarLocation)
 
         if (!Config.channel.isReleased) {
             preferenceLeakCanary?.setOnPreferenceChangeListener { _, newValue ->
@@ -339,6 +317,13 @@ class SettingsFragment : PreferenceFragmentCompat() {
             } else {
                 activity?.window?.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
             }
+            true
+        }
+
+
+        preferenceToolbarLocation?.setOnPreferenceChangeListener { preference, newValue ->
+            preference.context.settings().preferences.edit()
+                .putBoolean(preference.key, newValue as Boolean).apply()
             true
         }
     }
