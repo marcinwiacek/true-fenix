@@ -70,16 +70,16 @@ open class FenixApplication : LocaleAwareApplication() {
         // before we know whether we want that (which is *after* the migration).
         // As a side effect this means pings submitted between the initialization here and until we
         // potentially enable Glean would be lost. However such pings do not exist at this moment.
-        logger.debug("Initializing Glean (uploadEnabled=false)")
-        Glean.initialize(
-            applicationContext = this,
-            configuration = Configuration(
-                channel = BuildConfig.BUILD_TYPE,
-                httpClient = ConceptFetchHttpUploader(
-                    lazy(LazyThreadSafetyMode.NONE) { components.core.client }
-                )),
-            uploadEnabled = false
-        )
+     //   logger.debug("Initializing Glean (uploadEnabled=false)")
+       // Glean.initialize(
+         //   applicationContext = this,
+           // configuration = Configuration(
+             //   channel = BuildConfig.BUILD_TYPE,
+               // httpClient = ConceptFetchHttpUploader(
+                //    lazy(LazyThreadSafetyMode.NONE) { components.core.client }
+            //    )),
+            //uploadEnabled = false
+        //)
 
         setupInMainProcessOnly()
     }
@@ -103,12 +103,12 @@ open class FenixApplication : LocaleAwareApplication() {
 
             // Enable the service-experiments component
             if (settings().isExperimentationEnabled && Config.channel.isReleaseOrBeta) {
-                Experiments.initialize(
-                    applicationContext,
-                    mozilla.components.service.experiments.Configuration(
-                        httpClient = lazy(LazyThreadSafetyMode.NONE) { components.core.client }
-                    )
-                )
+              //  Experiments.initialize(
+                //    applicationContext,
+                  //  mozilla.components.service.experiments.Configuration(
+                    //    httpClient = lazy(LazyThreadSafetyMode.NONE) { components.core.client }
+                    //)
+                //)
             }
 
             // Make sure the engine is initialized and ready to use.
@@ -128,9 +128,9 @@ open class FenixApplication : LocaleAwareApplication() {
         // time the application has launched, since there won't be enough time for the experiments
         // library to get a list of experiments. It will take effect the second time the
         // application is launched.
-        Experiments.withExperiment("fenix-test-2019-08-05") { branchName ->
-            ExperimentsMetrics.activeExperiment.set(branchName)
-        }
+       // Experiments.withExperiment("fenix-test-2019-08-05") { branchName ->
+         //   ExperimentsMetrics.activeExperiment.set(branchName)
+       // }
 
         setupLeakCanary()
         if (settings().isTelemetryEnabled) {
