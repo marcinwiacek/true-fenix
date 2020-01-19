@@ -92,7 +92,7 @@ class HistoryAdapter(
             } else {
                 val checked = Calendar.getInstance()
                 checked.timeInMillis = time
-                return week == checked.get(Calendar.WEEK_OF_YEAR) - 1 && year == checked.get(
+                return week -1 == checked.get(Calendar.WEEK_OF_YEAR) && year == checked.get(
                     Calendar.YEAR
                 )
             }
@@ -117,7 +117,7 @@ class HistoryAdapter(
             } else {
                 val checked = Calendar.getInstance()
                 checked.timeInMillis = time
-                return month == checked.get(Calendar.MONTH) - 1 && year == checked.get(Calendar.YEAR)
+                return month -1 == checked.get(Calendar.MONTH) && year == checked.get(Calendar.YEAR)
             }
         }
 
