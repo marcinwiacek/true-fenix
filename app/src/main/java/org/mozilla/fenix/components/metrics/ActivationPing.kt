@@ -177,11 +177,11 @@ class ActivationPing(private val context: Context) {
      * starts.
      */
     fun checkAndSend() {
-        if (wasAlreadyTriggered()) {
-            Logger.debug("ActivationPing - already generated")
-            return
-        }
+      //  if (wasAlreadyTriggered()) {
+       //     Logger.debug("ActivationPing - already generated")
+       //     return
+       // }
 
-        triggerPing()
+       // triggerPing()
     }
 }
