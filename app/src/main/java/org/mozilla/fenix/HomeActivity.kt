@@ -104,15 +104,15 @@ open class HomeActivity : LocaleAwareAppCompatActivity() {
             FenixOnboarding(this).finish()
         }
 
-        if (settings().isTelemetryEnabled) {
-            lifecycle.addObserver(BreadcrumbsRecorder(components.analytics.crashReporter,
-                navHost.navController, ::getBreadcrumbMessage))
+      //  if (settings().isTelemetryEnabled) {
+        //    lifecycle.addObserver(BreadcrumbsRecorder(components.analytics.crashReporter,
+          //      navHost.navController, ::getBreadcrumbMessage))
 
-            intent
-                ?.toSafeIntent()
-                ?.let(::getIntentSource)
-                ?.also { components.analytics.metrics.track(Event.OpenedApp(it)) }
-        }
+            //intent
+//                ?.toSafeIntent()
+//                ?.let(::getIntentSource)
+//                ?.also { components.analytics.metrics.track(Event.OpenedApp(it)) }
+//        }
         supportActionBar?.hide()
     }
 

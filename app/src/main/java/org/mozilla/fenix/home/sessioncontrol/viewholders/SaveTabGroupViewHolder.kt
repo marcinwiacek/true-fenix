@@ -19,8 +19,8 @@ class SaveTabGroupViewHolder(
 
     init {
         view.save_tab_group_button.setOnClickListener {
-            view.context.components.analytics.metrics
-                .track(Event.CollectionSaveButtonPressed(TELEMETRY_HOME_IDENTIFIER))
+         //   view.context.components.analytics.metrics
+          //      .track(Event.CollectionSaveButtonPressed(TELEMETRY_HOME_IDENTIFIER))
             interactor.onSaveToCollection(sessionId = null)
         }
     }

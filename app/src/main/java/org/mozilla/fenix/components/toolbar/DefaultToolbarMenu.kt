@@ -45,7 +45,12 @@ class DefaultToolbarMenu(
     private var currentUrlIsBookmarked = false
     private var isBookmarkedJob: Job? = null
 
-    override val menuBuilder by lazy { BrowserMenuBuilder(menuItems, endOfMenuAlwaysVisible = true) }
+    override val menuBuilder by lazy {
+        BrowserMenuBuilder(
+            menuItems,
+            endOfMenuAlwaysVisible = true
+        )
+    }
 
     override val menuToolbar by lazy {
         val forward = BrowserMenuItemToolbar.TwoStateButton(
@@ -131,8 +136,8 @@ class DefaultToolbarMenu(
 
     private val menuItems by lazy {
         // Predicates that are called once, during screen init
-       // val shouldShowSaveToCollection = (context.asActivity() as? HomeActivity)
-      //      ?.browsingModeManager?.mode == BrowsingMode.Normal
+        // val shouldShowSaveToCollection = (context.asActivity() as? HomeActivity)
+        //      ?.browsingModeManager?.mode == BrowsingMode.Normal
         val shouldDeleteDataOnQuit = Settings.getInstance(context)
             .shouldDeleteBrowsingDataOnQuit
 
@@ -141,12 +146,14 @@ class DefaultToolbarMenu(
             return context.components.useCases.webAppUseCases.isPinningSupported() &&
                     context.components.core.sessionManager.selectedSession != null
         }
+
         fun shouldShowReaderMode(): Boolean = sessionManager.selectedSession?.readerable ?: false
         fun shouldShowOpenInApp(): Boolean = sessionManager.selectedSession?.let { session ->
             val appLink =
                 context.components.useCases.appLinksUseCases.appLinkRedirect
             appLink(session.url).hasExternalApp()
         } ?: false
+
         fun shouldShowReaderAppearance(): Boolean =
             sessionManager.selectedSession?.readerMode ?: false
 
@@ -154,7 +161,7 @@ class DefaultToolbarMenu(
             menuToolbar,
             BrowserMenuDivider(),
             addToHomescreen.apply { visible = ::shouldShowAddToHomescreen },
-                    desktopMode,
+            desktopMode,
             findInPage,
             //privateTab,
             // newTab,
@@ -173,7 +180,11 @@ class DefaultToolbarMenu(
             help
         )
 
-        if (shouldReverseItems) { menuItems.reversed() } else { menuItems }
+        if (shouldReverseItems) {
+            menuItems.reversed()
+        } else {
+            menuItems
+        }
     }
 
     private val help = BrowserMenuImageText(
@@ -226,7 +237,7 @@ class DefaultToolbarMenu(
         onItemTapped.invoke(ToolbarMenu.Item.RequestDesktop(checked))
     }
 
-    private val addToHomescreen = BrowserMenuHighlightableItem(
+    /*private val addToHomescreen = BrowserMenuHighlightableItem(
         label = context.getString(R.string.browser_menu_add_to_homescreen),
         startImageResource = R.drawable.ic_add_to_homescreen,
         iconTintColorResource = primaryTextColor(),
@@ -240,7 +251,21 @@ class DefaultToolbarMenu(
         }
     ) {
         onItemTapped.invoke(ToolbarMenu.Item.AddToHomeScreen)
+    }*/
+
+    private val addToHomescreen = BrowserMenuImageText(
+        label =
+        if (context.components.useCases.webAppUseCases.isPinningSupported() &&
+            context.components.useCases.webAppUseCases.isInstallable()
+        )
+            context.getString(R.string.browser_menu_install_on_homescreen) else
+            context.getString(R.string.browser_menu_add_to_homescreen),
+        imageResource = R.drawable.ic_add_to_homescreen,
+        iconTintColorResource = primaryTextColor()
+    ) {
+        onItemTapped.invoke(ToolbarMenu.Item.AddToHomeScreen)
     }
+
 
     private val findInPage = BrowserMenuImageText(
         label = context.getString(R.string.browser_menu_find_in_page),
@@ -250,21 +275,21 @@ class DefaultToolbarMenu(
         onItemTapped.invoke(ToolbarMenu.Item.FindInPage)
     }
 
-   /* private val privateTab = BrowserMenuImageText(
-        label = context.getString(R.string.browser_menu_private_tab),
-        imageResource = R.drawable.ic_private_browsing,
-        iconTintColorResource = primaryTextColor()
-    ) {
-        onItemTapped.invoke(ToolbarMenu.Item.NewPrivateTab)
-    }
+    /* private val privateTab = BrowserMenuImageText(
+         label = context.getString(R.string.browser_menu_private_tab),
+         imageResource = R.drawable.ic_private_browsing,
+         iconTintColorResource = primaryTextColor()
+     ) {
+         onItemTapped.invoke(ToolbarMenu.Item.NewPrivateTab)
+     }
 
-    private val newTab = BrowserMenuImageText(
-        label = context.getString(R.string.browser_menu_new_tab),
-        imageResource = R.drawable.ic_new,
-        iconTintColorResource = primaryTextColor()
-    ) {
-        onItemTapped.invoke(ToolbarMenu.Item.NewTab)
-    }*/
+     private val newTab = BrowserMenuImageText(
+         label = context.getString(R.string.browser_menu_new_tab),
+         imageResource = R.drawable.ic_new,
+         iconTintColorResource = primaryTextColor()
+     ) {
+         onItemTapped.invoke(ToolbarMenu.Item.NewTab)
+     }*/
 
     private val reportIssue = BrowserMenuImageText(
         label = context.getString(R.string.browser_menu_report_issue),
@@ -320,7 +345,7 @@ class DefaultToolbarMenu(
             notificationTint = getColor(context, R.color.whats_new_notification_color)
         ),
         isHighlighted = { true }
-        ) {
+    ) {
         onItemTapped.invoke(ToolbarMenu.Item.OpenInApp)
     }
 
