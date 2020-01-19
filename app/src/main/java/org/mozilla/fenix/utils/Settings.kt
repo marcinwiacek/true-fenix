@@ -252,7 +252,7 @@ class Settings private constructor(
     )
 
     var shouldUseBottomToolbar by booleanPreference(
-        appContext.getPreferenceKey(R.string.pref_key_toolbar_bottom),
+        appContext.getPreferenceKey(R.string.pref_key_toolbar_on_bottom),
         // Default accessibility users to top toolbar
         default = !touchExplorationIsEnabled && !switchServiceIsEnabled
     )
@@ -284,11 +284,11 @@ class Settings private constructor(
             return accessibilityManager?.isTouchExplorationEnabled ?: false
         }
 
-    val toolbarSettingString: String
-        get() = when {
-            shouldUseBottomToolbar -> appContext.getString(R.string.preference_bottom_toolbar)
-            else -> appContext.getString(R.string.preference_top_toolbar)
-        }
+    //val toolbarSettingString: String
+      //  get() = when {
+//            shouldUseBottomToolbar -> appContext.getString(R.string.preference_bottom_toolbar)
+//            else -> appContext.getString(R.string.preference_top_toolbar)
+//        }
 
     fun getDeleteDataOnQuit(type: DeleteBrowsingDataOnQuitType): Boolean =
         preferences.getBoolean(type.getPreferenceKey(appContext), false)

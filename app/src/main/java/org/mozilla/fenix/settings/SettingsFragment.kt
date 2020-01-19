@@ -153,9 +153,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
             }
         }
 
-        val toolbarPreference =
-            findPreference<Preference>(getPreferenceKey(pref_key_toolbar))
-        toolbarPreference?.summary = context?.settings()?.toolbarSettingString
+//        val toolbarPreference =
+  //          findPreference<Preference>(getPreferenceKey(pref_key_toolbar))
+    //    toolbarPreference?.summary = context?.settings()?.toolbarSettingString
 
         val themesPreference =
             findPreference<Preference>(getPreferenceKey(pref_key_theme))
@@ -274,9 +274,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
             resources.getString(pref_key_theme) -> {
                 SettingsFragmentDirections.actionSettingsFragmentToThemeFragment()
             }
-            resources.getString(pref_key_toolbar) -> {
-                SettingsFragmentDirections.actionSettingsFragmentToToolbarSettingsFragment()
-            }
+           // resources.getString(pref_key_toolbar) -> {
+             //   SettingsFragmentDirections.actionSettingsFragmentToToolbarSettingsFragment()
+            //}
             resources.getString(pref_key_privacy_link) -> {
                 val intent = SupportUtils.createCustomTabIntent(
                     requireContext(),

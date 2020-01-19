@@ -509,16 +509,16 @@ class GleanMetricsService(private val context: Context) : MetricsService {
     }
 
     internal fun setStartupMetrics() {
-        Metrics.apply {
-            defaultBrowser.set(BrowsersCache.all(context).isDefaultBrowser)
-            MozillaProductDetector.getMozillaBrowserDefault(context)?.also {
-                defaultMozBrowser.set(it)
-            }
-            mozillaProducts.set(MozillaProductDetector.getInstalledMozillaProducts(context))
-            adjustCampaign.set(context.settings().adjustCampaignId)
-            totalUriCount.set(context.settings().totalUriCount.toString())
-            toolbarPosition.set(context.settings().toolbarSettingString)
-        }
+     //   Metrics.apply {
+//            defaultBrowser.set(BrowsersCache.all(context).isDefaultBrowser)
+//            MozillaProductDetector.getMozillaBrowserDefault(context)?.also {
+//                defaultMozBrowser.set(it)
+//            }
+//            mozillaProducts.set(MozillaProductDetector.getInstalledMozillaProducts(context))
+//            adjustCampaign.set(context.settings().adjustCampaignId)
+//            totalUriCount.set(context.settings().totalUriCount.toString())
+ //           toolbarPosition.set(context.settings().toolbarSettingString)
+//        }
 
         SearchDefaultEngine.apply {
             val defaultEngine = context
@@ -532,7 +532,7 @@ class GleanMetricsService(private val context: Context) : MetricsService {
             submissionUrl.set(defaultEngine.buildSearchUrl(""))
         }
 
-        activationPing.checkAndSend()
+  //      activationPing.checkAndSend()
     }
 
     override fun stop() {
