@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.fragment_browser.*
 import kotlinx.android.synthetic.main.fragment_browser.view.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import mozilla.components.browser.session.Session
+import mozilla.components.feature.session.SwipeRefreshFeature
 import mozilla.components.feature.contextmenu.ContextMenuCandidate
 import mozilla.components.feature.readerview.ReaderViewFeature
 import mozilla.components.feature.session.TrackingProtectionUseCases
@@ -44,6 +45,7 @@ import org.mozilla.fenix.trackingprotection.TrackingProtectionOverlay
 class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
 
     private val windowFeature = ViewBoundFeatureWrapper<WindowFeature>()
+    private val swipeRefreshFeature = ViewBoundFeatureWrapper<SwipeRefreshFeature>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +73,7 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
     override fun initializeUI(view: View): Session? {
         val context = requireContext()
         val sessionManager = context.components.core.sessionManager
+        val sessionUseCases = activity?.components?.useCases?.sessionUseCases
 
         return super.initializeUI(view)?.also {
             readerViewFeature.set(
@@ -96,6 +99,14 @@ class BrowserFragment : BaseBrowserFragment(), UserInteractionHandler {
                 owner = this,
                 view = view
             )
+
+            swipeRefreshFeature.set(
+                feature = SwipeRefreshFeature(
+                    sessionManager = sessionManager,
+                    reloadUrlUseCase = sessionUseCases!!.reload,
+                    swipeRefreshLayout = swipeRefresh),
+                owner = this,
+                view = view)
 
             consumeFrom(browserFragmentStore) {
                 browserToolbarView.update(it)
